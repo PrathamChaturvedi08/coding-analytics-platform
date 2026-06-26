@@ -1,9 +1,15 @@
+const dns = require("node:dns/promises");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
 const http = require("http");
 const dotenv = require("dotenv");
 
 dotenv.config();
 
+const connectDB = require("./config/db");
 const app = require("./app");
+
+connectDB();
 
 const PORT = process.env.PORT || 5000;
 
