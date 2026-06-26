@@ -4,8 +4,6 @@ const router = express.Router();
 
 const authMiddleware = require("../middleware/authMiddleware");
 
-// const { connectLeetCode } = require("../controllers/userController");
-
 const {
   connectLeetCode,
   syncProfile,

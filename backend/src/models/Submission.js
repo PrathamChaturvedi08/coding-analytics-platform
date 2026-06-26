@@ -6,14 +6,22 @@ const submissionSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+      index: true,
     },
 
     title: {
       type: String,
       required: true,
+      trim: true,
     },
 
     titleSlug: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    questionId: {
       type: String,
       required: true,
     },
@@ -29,6 +37,32 @@ const submissionSchema = new mongoose.Schema(
         type: String,
       },
     ],
+
+    companyTags: [
+      {
+        type: String,
+      },
+    ],
+
+    acceptanceRate: {
+      type: Number,
+      default: 0,
+    },
+
+    likes: {
+      type: Number,
+      default: 0,
+    },
+
+    dislikes: {
+      type: Number,
+      default: 0,
+    },
+
+    isPaidOnly: {
+      type: Boolean,
+      default: false,
+    },
 
     language: {
       type: String,
