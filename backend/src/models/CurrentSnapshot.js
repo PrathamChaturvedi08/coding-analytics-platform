@@ -93,6 +93,26 @@ const currentSnapshotSchema = new mongoose.Schema(
       default: {},
     },
 
+    currentStreak: {
+      type: Number,
+      default: 0,
+    },
+
+    longestStreak: {
+      type: Number,
+      default: 0,
+    },
+
+    activeDays: {
+      type: Number,
+      default: 0,
+    },
+
+    totalSubmissions: {
+      type: Number,
+      default: 0,
+    },
+
     syncedAt: {
       type: Date,
       default: Date.now,

@@ -10,6 +10,16 @@ const { getContestData } = require("../providers/leetcode/contestProvider");
 
 const { getCalendar } = require("../providers/leetcode/calendarProvider");
 
+const {
+  getSubmissionDates,
+  getCurrentStreak,
+  getLongestStreak,
+  getTotalSubmissions,
+  getActiveDays,
+  getConsistencyScore,
+  getDifficultyScore,
+} = require("../analytics/growthService");
+
 /*
  * Archive the current snapshot if it is older than 7 days.
  */
@@ -100,6 +110,16 @@ const updateCurrentSnapshot = async (userId, profile, contest, calendar) => {
   snapshot.contestAttended = contest.contestAttended;
 
   snapshot.submissionCalendar = calendar.submissionCalendar;
+
+  const submissionDates = getSubmissionDates(calendar.submissionCalendar);
+
+  snapshot.currentStreak = getCurrentStreak(submissionDates);
+
+  snapshot.longestStreak = getLongestStreak(submissionDates);
+
+  snapshot.activeDays = getActiveDays(calendar.submissionCalendar);
+
+  snapshot.totalSubmissions = getTotalSubmissions(calendar.submissionCalendar);
 
   snapshot.syncedAt = new Date();
 
