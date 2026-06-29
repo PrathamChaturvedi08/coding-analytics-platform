@@ -8,6 +8,7 @@ const {
   getWeakestTopics,
   getImprovingTopics,
   getTopicDistribution,
+  getSnapshotList,
 } = require("../services/analytics/analyticsService");
 
 exports.getSummary = async (req, res) => {
@@ -122,6 +123,28 @@ exports.compare = async (req, res) => {
         currentSnapshot.skillStats,
         previousSnapshot.skillStats,
       ),
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+exports.getSnapshots = async (req, res) => {
+  try {
+    const snapshots = await Snapshot.find({
+      user: req.user._id,
+    })
+      .sort({
+        startDate: -1,
+      })
+      .select("startDate endDate totalSolved");
+
+    return res.status(200).json({
+      success: true,
+      snapshots: getSnapshotList(snapshots),
     });
   } catch (error) {
     return res.status(500).json({

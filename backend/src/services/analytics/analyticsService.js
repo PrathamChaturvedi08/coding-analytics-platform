@@ -105,6 +105,15 @@ const compareSnapshots = (currentSnapshot, previousSnapshot, weeksBetween) => {
   };
 };
 
+const getSnapshotList = (snapshots) => {
+  return snapshots.map((snapshot) => ({
+    _id: snapshot._id,
+    startDate: snapshot.startDate,
+    endDate: snapshot.endDate,
+    totalSolved: snapshot.totalSolved,
+  }));
+};
+
 module.exports = {
   calculateWeeksBetween,
 
@@ -117,4 +126,6 @@ module.exports = {
   getImprovingTopics,
 
   getTopicDistribution,
+
+  getSnapshotList,
 };
